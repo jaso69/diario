@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --gold: #c9a050;
+  --gold-light: #e8d098;
+  --gold-dark: #7a5e20;
+  --red: #9b2c2c;
+  --bg-card: rgba(18, 16, 14, 0.88);
+  --text: #e0d6c8;
+  --text-muted: rgba(200, 180, 150, 0.55);
+  --border: rgba(200, 160, 80, 0.28);
+  --input-bg: rgba(12, 10, 8, 0.65);
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #080808;
+  font-family: var(--font);
+  overflow: hidden;
+  cursor: default;
+}
+
+/* ── Particles canvas ── */
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Ambient glow ── */
+.ambient-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.22;
+  z-index: 0;
+  pointer-events: none;
+  animation: pulseGlow 5s ease-in-out infinite alternate;
+}
+.glow-1 {
+  width: 650px; height: 650px;
+  background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+  top: -250px; left: -200px;
+}
+.glow-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, var(--red) 0%, transparent 70%);
+  bottom: -200px; right: -180px;
+  animation-delay: 2.5s;
+}
+@keyframes pulseGlow {
+  0% { opacity: 0.12; transform: scale(0.9); }
+  100% { opacity: 0.28; transform: scale(1.12); }
+}
+
+/* ── Card ── */
+.card-wrapper {
+  position: relative;
+  z-index: 1;
+  perspective: 1200px;
+}
+
+.card {
+  width: 420px;
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 52px 44px 44px;
+  position: relative;
+  box-shadow:
+    0 0 80px rgba(120, 90, 30, 0.18),
+    0 0 140px rgba(140, 30, 30, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+
+/* ── Logo & Title ── */
+.logo-area {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.logo-mark {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 16px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #1a1206;
+  box-shadow: 0 4px 20px rgba(180, 140, 60, 0.35);
+}
+
+.logo-area h1 {
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 3px;
+}
+
+.logo-area .tagline {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 2.5px;
+  margin-top: 6px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+/* ── Form ── */
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  transition: color 0.3s;
+}
+.form-group:focus-within label {
+  color: var(--gold-light);
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper .input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: rgba(200, 160, 80, 0.35);
+  transition: color 0.3s;
+  pointer-events: none;
+  line-height: 1;
+}
+.form-group:focus-within .input-icon {
+  color: var(--gold);
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 13px 15px 13px 44px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: 0.5px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+.input-wrapper input::placeholder {
+  color: rgba(200, 160, 80, 0.22);
+  font-size: 0.82rem;
+}
+.input-wrapper input:focus {
+  border-color: var(--gold);
+  box-shadow:
+    0 0 18px rgba(200, 160, 80, 0.12),
+    inset 0 0 12px rgba(200, 160, 80, 0.04);
+  background: rgba(16, 13, 10, 0.75);
+}
+
+/* ── Toggle password ── */
+.toggle-password {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  color: rgba(200, 160, 80, 0.32);
+  transition: color 0.3s, text-shadow 0.3s;
+  z-index: 2;
+  padding: 4px;
+  line-height: 1;
+}
+.toggle-password:hover {
+  color: var(--gold);
+  text-shadow: 0 0 8px var(--gold);
+}
+
+/* ── Remember & Forgot ── */
+.options-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 0 28px;
+  font-size: 0.72rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-weight: 400;
+  transition: color 0.3s;
+  user-select: none;
+}
+.remember-me:hover { color: var(--gold); }
+.remember-me input[type="checkbox"] {
+  appearance: none;
+  width: 16px; height: 16px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--input-bg);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.remember-me input[type="checkbox"]:checked {
+  background: var(--gold-dark);
+  border-color: var(--gold);
+  box-shadow: 0 0 8px rgba(200, 160, 80, 0.25);
+}
+.remember-me input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
+.forgot-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  font-weight: 400;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+.forgot-link:hover {
+  color: var(--gold-light);
+  text-shadow: 0 0 10px rgba(200, 160, 80, 0.35);
+}
+
+/* ── Button ── */
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #1a1006;
+  background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 45%, var(--gold-dark) 100%);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s ease;
+  box-shadow:
+    0 4px 18px rgba(120, 90, 30, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+.btn-login:hover {
+  box-shadow:
+    0 6px 30px rgba(200, 160, 80, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  letter-spacing: 5px;
+  background: linear-gradient(180deg, #f0dfa0 0%, var(--gold-light) 40%, var(--gold) 100%);
+}
+.btn-login:active {
+  transform: scale(0.97);
+  transition: transform 0.12s;
+}
+.btn-login::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(90deg,
+    transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: rotate(25deg);
+  animation: btnShine 4s ease-in-out infinite;
+}
+@keyframes btnShine {
+  0%, 100% { left: -60%; }
+  50% { left: 120%; }
+}
+
+.btn-login.loading {
+  pointer-events: none;
+  color: transparent;
+}
+.btn-login.loading::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 2px solid transparent;
+  border-top-color: #1a1006;
+  border-radius: 50%;
+  width: 20px; height: 20px;
+  margin: auto;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-130px);
+  background: rgba(18, 16, 14, 0.96);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 13px 28px;
+  color: var(--gold-light);
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  z-index: 1000;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(140, 30, 30, 0.15);
+  transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.error { border-color: var(--red); color: #e06060; }
+.toast.success { border-color: #4a8; color: #6c6; }
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .card {
+    width: 92vw;
+    padding: 38px 24px 32px;
+    border-radius: 10px;
+  }
+  .logo-area h1 { font-size: 1.3rem; letter-spacing: 2px; }
+}
